@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Nidhi254/tictactoe.git/static/css/main.44148684.css",
+    "main.js": "/Nidhi254/tictactoe.git/static/js/main.778a6976.js",
+    "static/js/453.44377a28.chunk.js": "/Nidhi254/tictactoe.git/static/js/453.44377a28.chunk.js",
+    "index.html": "/Nidhi254/tictactoe.git/index.html",
+    "main.44148684.css.map": "/Nidhi254/tictactoe.git/static/css/main.44148684.css.map",
+    "main.778a6976.js.map": "/Nidhi254/tictactoe.git/static/js/main.778a6976.js.map",
+    "453.44377a28.chunk.js.map": "/Nidhi254/tictactoe.git/static/js/453.44377a28.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.44148684.css",
+    "static/js/main.778a6976.js"
+  ]
+}
