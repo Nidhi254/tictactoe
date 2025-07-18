@@ -15,38 +15,52 @@ const style = {
     opacity: "0.6",
     textShadow: "5px 5px #46474aff",
   },
+  button: {
+    padding: "0.5em 1em",
+    fontSize: "1rem",
+    marginTop: "1rem",
+    borderRadius: "6px",
+    border: "none",
+    backgroundColor: "#444",
+    color: "#f6be08",
+    cursor: "pointer",
+  },
 };
 
 const Game = () => {
-  //board state initial = [null,null,null,null,null,null,null,null,null]
   const [board, setBoard] = useState(Array(9).fill(null));
-  //state to track next turn
   const [xTurn, setXTurn] = useState(true);
-  //variable to find winner (otherwise equals to null)
-  const winner = calculateWinner(board);
 
-  //everytime checks if winner is present or clicked on marked square then just returns
-  //otherwise update board array's clicked index value with 'X' or 'O'
+  const winnerInfo = calculateWinner(board);
+  const winner = winnerInfo?.winner || null;
+  const winningLine = winnerInfo?.line || [];
+
   const handleClick = (i) => {
+    if (board[i] || winner) return;
     const tmpBoard = [...board];
-    if (!!winner || !!tmpBoard[i]) return;
-
     tmpBoard[i] = xTurn ? "X" : "O";
     setBoard(tmpBoard);
     setXTurn(!xTurn);
   };
 
-  const resetBoard = () => (
-    <button onClick={() => setBoard(Array(9).fill(null))}>Start Game</button>
-  );
+  const resetBoard = () => {
+    setBoard(Array(9).fill(null));
+    setXTurn(true);
+  };
 
   return (
     <div style={style.container}>
       <p style={style.info}>
-        {winner ? "Winner: " + winner : "Next Player: " + (xTurn ? "X" : "O")}
+        {winner ? `Winner: ${winner}` : `Next Player: ${xTurn ? "X" : "O"}`}
       </p>
-      <Board squares={board} handleClick={handleClick} />
-      <div>{resetBoard()}</div>
+      <Board
+        squares={board}
+        handleClick={handleClick}
+        winningLine={winningLine}
+      />
+      <button style={style.button} onClick={resetBoard}>
+        Start Game
+      </button>
     </div>
   );
 };

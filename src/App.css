@@ -1,12 +1,21 @@
 :root {
   --bg-color-light: #d5f5ffe6;
   --bg-color-dark: #0c0c0c;
-  --text-color-light: #0617fd44;
+  --text-color-light: rgba(6, 23, 253, 0.27); /* Adjusted for clarity */
   --text-color-dark: #f1c410;
   --accent-color: #d31818;
   --highlight-color: rgb(64, 64, 10);
 }
 
+/* ✅ Prevent flicker on initial load */
+body {
+  background-color: var(--bg-color-light);
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Themed backgrounds & text */
 .App.light {
   background-color: var(--bg-color-light);
   color: var(--text-color-light);
@@ -44,7 +53,7 @@
   margin-bottom: 10px;
 }
 
-/* Board */
+/* Board rows */
 .board-row {
   display: flex;
   justify-content: center;
@@ -82,7 +91,7 @@
   font-size: 18px;
 }
 
-/* Buttons */
+/* General buttons */
 button {
   padding: 1em;
   min-width: 44px;
@@ -118,23 +127,7 @@ button:hover {
   transform: scale(1.2);
 }
 
-/* Volume slider */
-.volume-label {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 1rem;
-  color: inherit;
-  z-index: 1000;
-}
-
-.volume-label input[type="range"] {
-  margin-left: 10px;
-  width: 100px;
-  cursor: pointer;
-}
-
-/* 📱 Mobile responsiveness */
+/* 📱 Responsive tweaks for mobile */
 @media (max-width: 600px) {
   .game {
     flex-direction: column;
@@ -152,7 +145,19 @@ button:hover {
     font-size: 7vw;
   }
 
-  .status,
+  @keyframes flashWin {
+  0%   { background-color: var(--highlight-color); transform: scale(1); box-shadow: 0 0 5px #ffeb3b; }
+  50%  { background-color: #fff42d; transform: scale(1.1); box-shadow: 0 0 15px #fdfd96; }
+  100% { background-color: var(--highlight-color); transform: scale(1); box-shadow: 0 0 5px #ffeb3b; }
+}
+
+.square.win {
+  animation: flashWin 0.6s ease-in-out infinite;
+  border: 2px solid #fff000;
+  z-index: 10;
+}
+
+.status,
   .score-board {
     font-size: 5vw;
   }
@@ -167,14 +172,4 @@ button:hover {
     top: 15px;
     right: 15px;
   }
-
-  .volume-label {
-    font-size: 4vw;
-    bottom: 15px;
-    right: 15px;
   }
-
-  .volume-label input[type="range"] {
-    width: 80px;
-  }
-}
